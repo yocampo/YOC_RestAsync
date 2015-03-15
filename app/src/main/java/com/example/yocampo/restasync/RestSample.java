@@ -1,19 +1,34 @@
 package com.example.yocampo.restasync;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 public class RestSample extends ActionBarActivity {
+
+    private Button consultar;
+    private TextView respuesta;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rest_sample);
-    }
 
+        consultar = (Button) findViewById(R.id.btnConsultar);
+        respuesta = (TextView) findViewById(R.id.lblRespuesta);
+
+        consultar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                respuesta.setText("");
+                new HttpGetter().execute(respuesta);
+            }
+        });
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -37,3 +52,5 @@ public class RestSample extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 }
+
+
